@@ -15,7 +15,7 @@ class Soldier {
 }
 
 // Viking
-class Viking {
+class Viking extends Soldier {
   constructor(name, health, strength) {
     super(health, strength);
     this.name = name;
@@ -36,7 +36,7 @@ class Viking {
 }
 
 // Saxon
-class Saxon {
+class Saxon extends Soldier {
   receiveDamage(damage) {
     this.health -= damage;
     if (this.health > 0) {
@@ -48,64 +48,6 @@ class Saxon {
 }
 
 // War
-class War {
-  constructor() {
-    this.vikingArmy = [];
-    this.saxonArmy = [];
-  }
-
-  addViking(viking) {
-    this.vikingArmy.push(viking);
-  }
-
-  addSaxon(saxon) {
-    this.saxonArmy.push(saxon);
-  }
-
-  vikingAttack() {
-    const randomSaxonIndex = Math.floor(Math.random() * this.saxonArmy.length);
-    const randomVikingIndex = Math.floor(Math.random() * this.vikingArmy.length);
-
-    const saxon = this.saxonArmy[randomSaxonIndex];
-    const viking = this.vikingArmy[randomVikingIndex];
-
-    const result = saxon.receiveDamage(viking.strength);
-
-    if (saxon.health <= 0) {
-      this.saxonArmy.splice(randomSaxonIndex, 1);
-    }
-
-    return result;
-  }
-
-  saxonAttack() {
-    const randomSaxonIndex = Math.floor(Math.random() * this.saxonArmy.length);
-    const randomVikingIndex = Math.floor(Math.random() * this.vikingArmy.length);
-
-    const saxon = this.saxonArmy[randomSaxonIndex];
-    const viking = this.vikingArmy[randomVikingIndex];
-
-    const result = viking.receiveDamage(saxon.strength);
-
-    if (viking.health <= 0) {
-      this.vikingArmy.splice(randomVikingIndex, 1);
-    }
-
-    return result;
-  }
-
-  showStatus() {
-    if (this.saxonArmy.length === 0) {
-      return "Vikings have won the war of the century!";
-    } else if (this.vikingArmy.length === 0) {
-      return "Saxons have fought for their lives and survived another day...";
-    } else {
-      return "Vikings and Saxons are still in the thick of battle.";
-    }
-  }
-}
-
-//bonus 5
 class War {
   constructor() {
     this.vikingArmy = [];
@@ -153,6 +95,12 @@ class War {
       return "Vikings and Saxons are still in the thick of battle.";
     }
   }
+}
+
+// The following is required to make unit tests work.
+/* Environment setup. Do not modify the below code. */
+if (typeof module !== 'undefined') {
+  module.exports = { Soldier, Viking, Saxon, War };
 }
 
 // The following is required to make unit tests work.
