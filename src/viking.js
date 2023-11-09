@@ -1,5 +1,28 @@
 // Soldier
-class Soldier {}
+class Soldier {
+
+  // Add the constructor and this
+  constructor(health, strength) {
+    this.health = health;
+    this.strength = strength;
+  }
+
+  // Adding atack() method
+  attack() {
+
+    // Returns the strignt property
+    return this.strength;
+
+  }
+
+  // Adding receiveDamage() method
+  receiveDamage(damage) {
+
+    // Substracting the damage from healt
+    this.health -= damage;
+  }
+
+}
 
 // Viking
 class Viking {}
