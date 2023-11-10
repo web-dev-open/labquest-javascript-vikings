@@ -409,6 +409,91 @@ console.log(`Result of Saxon's attack ${war.saxonAttack()}`);
 // Show the status of the War
 console.log("War status: ", war.showStatus());
 
+// Iteration No. 5
+console.log("\n Iteration No. 5 WAR!!!");
+
+class War2 {
+
+  // Creatomg the arrays in the constructor
+  constructor() {
+    this.vikingArmy = [];
+    this.saxonArmy = []; 
+  }
+
+  // Adding the viking object to the array.
+  addViking(viking) {
+    this.vikingArmy.push(viking);
+  }
+
+  // adding the saxon object to the array.
+  addSaxon(saxon) {
+    this.saxonArmy.push(saxon);
+  }
+
+  // Refactor code - with a  generic attack method
+  attack(attackers, defenders) {
+
+    // Creating the attackers and Defenders with the same logic
+    const attacker = attackers[Math.floor(Math.random() * attackers.length)];
+    const defender = defenders[Math.floor(Math.random() * defenders.length)];
+    const result = defender.receiveDamage(attacker.strength);
+    
+    // Removed the defeated ones (vikings or saxons)
+    if (defender.health <= 0) {
+      defenders.splice(defenders.indexOf(defender), 1);
+    }
+
+    return result;
+  }
+
+  // Vikings attack Saxons
+  vikingAttack() {
+    return this.attack(this.vikingArmy, this.saxonArmy);
+  }
+
+  // Saxons attack Vikings
+  saxonAttack() {
+    return this.attack(this.saxonArmy, this.vikingArmy);
+  }
+
+  showStatus() {
+    if (this.saxonArmy.length === 0) { 
+      return 'Vikings have won the war of the century!';
+    } else if (this.vikingArmy.length === 0) {
+      return 'Saxons have fought for their lives and survived another day...';
+    } else {
+      return 'Vikings and Saxons are still in the thick of battle.';
+    }
+  }
+
+}
+
+// Test of Iteration No. 5
+console.log("\nTest of the Iteration No. 5");
+
+// Creating the instanmces
+const war2 = new War2();
+
+// Adding Vikings to the Viking Army
+war2.addViking(new Viking("Erik, 100, 50"));
+war2.addViking(new Viking("Bjorn, 80, 40"));
+war2.addViking(new Viking("Astrid, 120, 80"));
+
+// Adding Saxons to the saxon Army
+war2.addSaxon(new Saxon("Aethelwulf", 50, 30));
+war2.addSaxon(new Saxon("Alfred", 75, 35));
+war2.addSaxon(new Saxon("Ecgberht", 60, 30));
+war2.addSaxon(new Saxon("Eadgifu", 55, 40));
+war2.addSaxon(new Saxon("Mildred", 65, 65));
+
+// Perform some Attacks
+console.log(`Result of the Viking attack ${war2.vikingAttack()}`);
+console.log(`Result of Saxon's attack ${war2.saxonAttack()}`);
+
+// Show the status of the War
+console.log("War status: ", war2.showStatus());
+
+
 console.log("\n");
 
 // The following is required to make unit tests work.
