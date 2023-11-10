@@ -233,8 +233,181 @@ console.log(`Saxon No. 2 ${saxon2.receiveDamage(90)}`);
 // Tesing attack() method.
 console.log(`Saxon No. 1 has ${saxon1.attack()} points of health.`);
 
-// War
-class War {}
+// Iteration No 4. War!
+console.log("\nIteration No. 4. War!");
+
+/*
+
+Now we get to the good stuff: WAR! Our War class will allow us to have a Viking army and a Saxon army that battle each other.
+
+Modify the War class and add 5 methods to its class:
+
+addViking()
+
+addSaxon()
+
+vikingAttack()
+
+saxonAttack()
+
+showStatus()
+
+class
+When we first create a War, the armies should be empty. We will add soldiers to the armies later.
+
+should receive 0 arguments
+
+should assign an empty array to the vikingArmy property
+
+should assign an empty array to the saxonArmy property
+
+*/
+
+// Creating the class
+class War {
+  
+  // Initializes empty arrays with constructor for both armies
+  constructor() {
+    this.vikingArmy = [];
+    this.saxonArmy = [];
+  }
+
+  /*
+
+  addViking() method
+  Adds 1 Viking to the vikingArmy. If you want a 10 Viking army, you need to call this 10 times.
+
+    * should be a function
+    * should receive 1 argument (a Viking object)
+    * should add the received Viking to the army
+    * shouldn't return anything
+
+  */
+
+  // Adding viking objetc to the viking array
+  addViking(viking) {
+    this.vikingArmy.push(viking);
+  }
+
+  /*
+
+  addSaxon() method
+  The Saxon version of addViking().
+    * should be a function
+    * should receive 1 argument (a Saxon object)
+    * should add the received Saxon to the army
+    * shouldn't return anything
+
+  */
+
+  // Adding saxon object to the saxon array
+  addSaxon(saxon) {
+    this.saxonArmy.push(saxon);
+  }
+
+  /*
+
+  vikingAttack() method
+  A Saxon (chosen at random) has their receiveDamage() method called with the damage equal to the strength of a Viking (also chosen at random). This should only perform a single attack and the Saxon doesn't get to attack back.
+    * should be a function
+    * should receive 0 arguments
+    * should make a Saxon receiveDamage() equal to the strength of a Viking
+    * should remove dead saxons from the army
+    * should return result of calling receiveDamage() of a Saxon with the strength of a Viking
+
+  */
+
+  saxonAttack() {
+
+    // Gettomg a random Saxon
+    const saxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)];
+
+    // Getting randon viking
+    const viking = this.vikingArmy[Math.floor(Math.random() * this.vikingArmy.length)];
+
+    // Saxon receices damage equivalent to the viking strngth
+    const result = saxon.receiveDamage(viking.strength);
+
+    // Remove the defeated Saxon from Army
+    if(saxon.health <= 0) {
+      this.saxonArmy.splice(this.saxonArmy.indexOf(saxon), 1);
+    }
+
+    // returning the result
+    return result;
+  }
+
+  /*
+
+  vikingAttack() method
+  A Saxon (chosen at random) has their receiveDamage() method called with the damage equal to the strength of a Viking (also chosen at random). This should only perform a single attack and the Saxon doesn't get to attack back.
+    * should be a function
+    * should receive 0 arguments
+    * should make a Saxon receiveDamage() equal to the strength of a Viking
+    * should remove dead saxons from the army
+    * should return result of calling receiveDamage() of a Saxon with the strength of a Viking
+
+  */
+
+  vikingAttack() {
+
+    // Getting a random viking
+    const viking = this.vikingArmy[Math.floor(Math.random() * this.vikingArmy.length)];
+
+    // Getting a random saxon
+    const saxon = this.saxonArmy[Math.floor(Math.random() * this.saxonArmy.length)];
+
+    // Viking receices damage in the same proportion of saxon strength
+    const result =  viking.receiveDamage(saxon.strength);
+
+    // remove defeated vikings from the army
+    if(viking.health <= 0) {
+      this.vikingArmy.splice(this.vikingArmy.indexOf(viking), 1);
+    }
+
+    // Return the result
+    return result;
+  }
+
+  // Show the end of the war.
+  showStatus() {
+    if(this.saxonArmy.length === 0) {
+      return `Vikings have won the war of the Century`;
+    
+    } else if (this.vikingArmy.length === 0) {
+      return `Saxons have fought for their lives and survived another day...`;
+    
+    } else {
+      return `Vikings and Saxons are still in the thick of battle`;
+    }
+  }
+
+}
+
+// Testing the Code of Iteration No 4.
+console.log("Testing of Iteratin No. 4 War!!");
+
+// Creating the instanmces
+const war = new War();
+
+// Adding Vikings to the Viking Army
+war.addViking(new Viking("Erik, 100, 50"));
+war.addViking(new Viking("Bjorn, 80, 40"));
+war.addViking(new Viking("Astrid, 120, 80"));
+
+// Adding Saxons to the saxon Army
+war.addSaxon(new Saxon("Aethelwulf", 50, 30));
+war.addSaxon(new Saxon("Alfred", 75, 35));
+war.addSaxon(new Saxon("Ecgberht", 60, 30));
+war.addSaxon(new Saxon("Eadgifu", 55, 40));
+war.addSaxon(new Saxon("Mildred", 65, 65));
+
+// Perform some Attacks
+console.log(`Result of the Viking attack ${war.vikingAttack()}`);
+console.log(`Result of Saxon's attack ${war.saxonAttack()}`);
+
+// Show the status of the War
+console.log("War status: ", war.showStatus());
 
 console.log("\n");
 
@@ -243,4 +416,3 @@ console.log("\n");
 if (typeof module !== 'undefined') {
   module.exports = { Soldier, Viking, Saxon, War };
 }
- 
