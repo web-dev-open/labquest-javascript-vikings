@@ -151,8 +151,87 @@ console.log(`${viking2.name} has ${viking2.attack()} points of Strength`);
 // Testing the receiveDamage if Viking lost his healt.
 console.log(`${viking1.receiveDamage(30)} So sad.`);
 
+console.log("\nIteration No. 3 Saxon Soldier");
+
+// Iteration No. 3 Implementing Saxon Soldier
+/*
+
+A Saxon is a weaker kind of Soldier. Unlike a Viking, a Saxon has no name. Their receiveDamage() method will also be different than the original Soldier version.
+
+Modify the Saxon, constructor function, have it inherit from Soldier and re-implement the receiveDamage() method for Saxon.
+
+inheritance
+Saxon should extend Soldier
+class
+You don't have to include constructor method since this class will inherit perfectly from the parents class, both, the health and the strength (it extends Soldier class)
+
+*/
+
 // Saxon
-class Saxon {}
+class Saxon extends Soldier{
+
+  // Constructor inherits from Soldier
+
+  /*
+
+    attack() method
+    This method should be inherited from Soldier, no need to re-implement it.
+
+      * should be a function
+      * should receive 0 arguments
+      * should return the strength property of the Saxon
+
+  */
+
+    // Inherit attack() from soldier
+
+    /*
+
+    receiveDamage() method
+    This method needs to be re-implemented for Saxon because the Saxon version needs to have different return values.
+
+      * should be a function
+      * should receive 1 argument (the damage)
+      * should remove the received damage from the health property
+      * if the Saxon is still alive, it should return "A Saxon has received DAMAGE points of damage"
+      * if the Saxon dies, it should return "A Saxon has died in combat"
+
+    */
+
+  // Re implementation fo receiveDamage()
+  receiveDamage(damage) {
+
+    // Calliing the parent method
+    super.receiveDamage(damage);
+
+    // Checking the health of the Saxon soldier
+    if(this.health > 0) {
+
+      // If still alive
+      return `A Saxon has received ${damage} points of damage.`;
+    
+    } else {
+      return "A Saxon has died in combat.";
+    }
+  }
+
+}
+
+console.log('\nTesting the Iteration No. 3 Code');
+// Testing receiveDamage() method
+
+const saxon1 = new Saxon(100, 80);
+const saxon2 = new Saxon(80, 50);
+
+console.log(`\nSaxon No. 1 has ${saxon1.health} points of Health and ${saxon1.strength} points of Strength`);
+console.log(`Saxon No. 2 has ${saxon2.health} points of Health and ${saxon2.strength} points of Strength`);
+
+// Testing receiveDamage re definied method
+console.log(`\nSaxon No. 1 ${saxon1.receiveDamage(10)}`);
+console.log(`Saxon No. 2 ${saxon2.receiveDamage(90)}`);
+
+// Tesing attack() method.
+console.log(`Saxon No. 1 has ${saxon1.attack()} points of health.`);
 
 // War
 class War {}
