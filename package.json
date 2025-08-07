@@ -12,6 +12,11 @@
     "jest-junit": "^12.0.0"
   },
   "jest": {
+    "watchPathIgnorePatterns": [
+      "node_modules/",
+      "coverage/",
+      "lab-solution.html"
+    ],
     "reporters": [
       "default",
       [
